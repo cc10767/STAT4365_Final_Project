@@ -1,0 +1,21 @@
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+num_cols = df[["Hours_Studied", "Attendance", "Sleep_Hours", "Previous_Scores", 
+                "Tutoring_Sessions", "Physical_Activity", "Exam_Score"]]
+
+fig, axes = plt.subplots(4, 5, figsize=(18, 12))
+axes = axes.flatten()
+
+for i, col in enumerate(num_cols):
+    sns.histplot(data=num_cols, x=col, bins=30, kde=True, ax=axes[i])
+    axes[i].set_title(col)
+    axes[i].set_xlabel("")
+
+# hide the last empty subplot if odd number of columns
+for j in range(i+1, len(axes)):
+    axes[j].set_visible(False)
+
+plt.suptitle("Distribution of Numerical Variables", y=1.02)
+plt.tight_layout()
+plt.show()
